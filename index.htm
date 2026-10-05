@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Центр отдыха ТУНУК</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    :root {
+      --blue: #00a8e8;
+      --deep-blue: #006fa6;
+      --ice: #eaf9ff;
+      --ink: #123448;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Raleway", sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      background: white;
+    }
+
+    .site-shell {
+      width: 100%;
+    }
+
+    .hero-title,
+    .section-heading {
+      font-family: "Playfair Display", serif;
+    }
+
+    .nav-glass {
+      background: rgba(255, 255, 255, .94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 168, 232, .14);
+    }
+
+    .nav-link {
+      color: #245269;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      min-height: 80vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0, 54, 83, .79) 0%,
+          rgba(0, 100, 149, .4) 48%,
+          rgba(0, 168, 232, .1) 100%
+        );
+      z-index: -1;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: #f5fcff;
+      clip-path: ellipse(74% 54% at 50% 100%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      letter-spacing: .16em;
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .info-strip {
+      margin-top: -42px;
+      position: relative;
+      z-index: 4;
+    }
+
+    .info-item {
+      border-right: 1px solid #d8f1fb;
+      background: white;
+    }
+
+    .info-item:last-child {
+      border-right: 0;
+    }
+
+    .section-heading {
+      color: #073d5b;
+      line-height: 1.1;
+    }
+
+    .service-card {
+      overflow: hidden;
+      border: 1px solid rgba(0, 132, 186, .12);
+      background: white;
+      box-shadow: 0 14px 34px rgba(0, 83, 125, .10);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 22px 44px rgba(0, 83, 125, .18);
+    }
+
+    .service-photo {
+      height: 210px;
+      width: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+
+    .service-card:hover .service-photo {
+      transform: scale(1.05);
+    }
+
+    .photo-frame {
+      border: 10px solid #fff;
+      box-shadow: 18px 18px 0 #bceeff;
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .45s ease;
+    }
+
+    .gallery-tile {
+      overflow: hidden;
+    }
+
+    .gallery-tile:hover .gallery-image {
+      transform: scale(1.06);
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      color: white;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .social-link:hover {
+      background: white;
+      color: var(--deep-blue);
+      transform: translateY(-3px);
+    }
+
+    .reveal {
+      animation: rise .7s ease both;
+    }
+
+    .delay-1 {
+      animation-delay: .12s;
+    }
+
+    .delay-2 {
+      animation-delay: .24s;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    :focus-visible {
+      outline: 3px solid #00a8e8;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 700px) {
+      .hero {
+        min-height: 76vh;
+      }
+
+      .info-strip {
+        margin-top: -18px;
+      }
+
+      .info-item {
+        border-right: 0;
+        border-bottom: 1px solid #d8f1fb;
+      }
+
+      .info-item:last-child {
+        border-bottom: 0;
+      }
+
+      .nav-link {
+        font-size: .68rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="site-shell">
+
+  <!-- HEADER -->
+  <header class="nav-glass sticky top-0 z-50 w-full">
+    <nav
+      aria-label="Основная навигация"
+      class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-4 lg:px-8"
+    >
+
+      <a href="#home" class="flex items-center gap-3 no-underline">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-sky-500 text-white">
+          <i data-lucide="waves" width="22" height="22"></i>
+        </span>
+
+        <span class="font-extrabold tracking-[0.16em] text-[#123448]">
+          TUNUK
+          
+        >
+        </span>
+      </a>
+
+      <div class="flex flex-wrap items-center justify-end gap-x-5 gap-y-2">
+        <a class="nav-link" href="#about">О центре</a>
+        <a class="nav-link" href="#services">Услуги</a>
+        <a class="nav-link" href="#gallery">Галерея</a>
+        <a class="nav-link" href="#contacts">Контакты</a>
+      </div>
+
+    </nav>
+  </header>
+
+
+  <main>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+
+      <img
+        class="hero-photo"
+        src="fon.jpg"
+        alt="Природа и горы"
+      >
+
+      <div class="mx-auto w-full max-w-7xl px-5 pb-24 pt-20 lg:px-8">
+
+        <div class="max-w-3xl text-white">
+
+          <p class="eyebrow reveal text-sky-200">
+            Центр отдыха ТУНУК
+          </p>
+
+          <h1 class="hero-title reveal delay-1 mt-5 max-w-3xl text-5xl font-bold leading-tight md:text-7xl">
+            Отдых, который хочется запомнить
+          </h1>
+
+          <p class="reveal delay-2 mt-6 max-w-2xl text-lg leading-8 text-white/90 md:text-xl">
+            Уютный центр отдыха для семей, друзей и тех,
+            кто хочет отдохнуть от городской суеты в окружении
+            природы и свежего воздуха.
+          </p>
+
+          <a
+            href="#services"
+            class="reveal delay-2 mt-8 inline-flex items-center gap-3 rounded-full bg-[#00a8e8] px-7 py-4 font-bold text-white no-underline shadow-xl transition hover:-translate-y-1 hover:bg-[#008fc7]"
+          >
+            <span>Посмотреть услуги</span>
+            <i data-lucide="arrow-down" width="18" height="18"></i>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="hero-wave" aria-hidden="true"></div>
+
+    </section>
+
+
+    <!-- BENEFITS -->
+    <section aria-label="Преимущества" class="info-strip mx-auto w-full max-w-6xl px-5">
+
+      <div class="grid overflow-hidden rounded-3xl bg-white shadow-xl sm:grid-cols-3">
+
+        <div class="info-item px-7 py-6">
+          <i data-lucide="map-pin" class="mb-3 text-sky-500" width="25" height="25"></i>
+
+          <p class="font-extrabold text-[#073d5b]">
+            Удобное расположение
+          </p>
+
+          <p class="mt-1 text-sm leading-6 text-[#557184]">
+            Центр отдыха ТУНУК расположен в городе Манас.
+          </p>
+        </div>
+
+
+        <div class="info-item px-7 py-6">
+          <i data-lucide="heart-handshake" class="mb-3 text-sky-500" width="25" height="25"></i>
+
+          <p class="font-extrabold text-[#073d5b]">
+            Бассейн|СПА|Массаж
+          </p>
+
+          <p class="mt-1 text-sm leading-6 text-[#557184]">
+             Время расслабиться и время для себя
+          </p>
+        </div>
+
+
+        <div class="info-item px-7 py-6">
+          <i data-lucide="heart-handshake" class="mb-3 text-sky-500" width="25" height="25"></i>
+
+          <p class="font-extrabold text-[#073d5b]">
+            Для всей семьи
+          </p>
+
+          <p class="mt-1 text-sm leading-6 text-[#557184]">
+            Комфортное место для семейного и дружеского отдыха.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+    <section id="services" class="w-full bg-[#f5fcff] px-5 py-24 lg:px-8">
+
+      <div class="mx-auto max-w-7xl">
+
+        <div class="max-w-2xl">
+
+          <p class="eyebrow text-sky-600">
+            Наши возможности
+          </p>
+
+          <h2 class="section-heading mt-4 text-4xl font-bold md:text-5xl">
+            Всё для приятного отдыха
+          </h2>
+
+          <p class="mt-5 leading-7 text-[#557184]">
+            В ТУНУК можно провести время с семьёй или друзьями,
+            отдохнуть у воды, расслабиться в сауне, насладиться
+            вкусной едой и просто провести день в спокойной атмосфере.
+          </p>
+
+        </div>
+
+
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+
+          <!-- POOL -->
+          <article class="service-card rounded-3xl">
+
+            <img
+              class="service-photo"
+              src="basse.jpg"
+              alt="Бассейн"
+            >
+
+            <div class="p-6">
+
+              <h3 class="text-xl font-extrabold text-[#073d5b]">
+                Бассейн
+              </h3>
+
+              <p class="mt-3 leading-7 text-[#557184]">
+                Отдохните у воды, освежитесь и проведите
+                незабываемый день в приятной компании.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- SAUNA -->
+          <article class="service-card rounded-3xl">
+
+            <img
+              class="service-photo"
+              src="bill.jpg"
+              alt="Биллярд"
+            >
+
+            <div class="p-6">
+
+              <h3 class="text-xl font-extrabold text-[#073d5b]">
+                Биллярд
+              </h3>
+
+              <p class="mt-3 leading-7 text-[#557184]">
+                Тёплая атмосфера для расслабления, отдыха
+                и приятного общения с близкими.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- FOOD -->
+          <article class="service-card rounded-3xl">
+
+            <img
+              class="service-photo"
+              src="ky.jpg"
+              alt="Ресторан"
+            >
+
+            <div class="p-6">
+
+              <h3 class="text-xl font-extrabold text-[#073d5b]" onclick="location.href='kitchen.html'">
+                Вкусная кухня
+              </h3>
+
+              <p class="mt-3 leading-7 text-[#557184]">
+                Собирайтесь за одним столом, наслаждайтесь
+                блюдами и хорошим настроением.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- COTTAGE -->
+          <article class="service-card rounded-3xl">
+
+            <img
+              class="service-photo"
+              src="fit.jpg"
+              alt="фитнес"
+            >
+
+            <div class="p-6">
+
+              <h3 class="text-xl font-extrabold text-[#073d5b]">
+                 Фитнес
+              </h3>
+
+              <p class="mt-3 leading-7 text-[#557184]">
+                Пространство, где можно спокойно провести время
+                вдали от городской суеты.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- FAMILY -->
+          <article class="service-card rounded-3xl">
+
+            <img
+              class="service-photo"
+              src="gos.jpg"
+              alt="Семейный отдых"
+            >
+
+            <div class="p-6">
+
+              <h3 class="text-xl font-extrabold text-[#073d5b]">
+                Гостевой дом
+              </h3>
+
+              <p class="mt-3 leading-7 text-[#557184]">
+                Отличное место для отдыха ,
+                встреч и особенных моментов.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- FISHING -->
+          <article class="service-card rounded-3xl">
+
+            <img
+              class="service-photo"
+              src="kino.jpg"
+              alt="Рыбалка"
+            >
+
+            <div class="p-6">
+
+              <h3 class="text-xl font-extrabold text-[#073d5b]">
+                Кино зал
+              </h3>
+
+              <p class="mt-3 leading-7 text-[#557184]">
+                Каждый фильм-новая история.
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about" class="w-full px-5 py-24 lg:px-8">
+
+      <div class="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
+
+        <div class="relative">
+
+          <img
+            class="photo-frame h-[440px] w-full rounded-[2rem] object-cover"
+            src="glav.jpg"
+            alt="Природа"
+          >
+
+          <div class="absolute -bottom-7 -right-2 rounded-2xl bg-[#00a8e8] px-6 py-5 text-white shadow-lg sm:right-7">
+
+            <span class="block text-xs font-bold uppercase tracking-[0.12em]">
+              ТУНУК
+            </span>
+
+            <span class="mt-1 block font-bold">
+              Место для отдыха
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <p class="eyebrow text-sky-600">
+            О центре
+          </p>
+
+          <h2 class="section-heading mt-4 text-4xl font-bold md:text-5xl">
+            Добро пожаловать в ТУНУК
+          </h2>
+
+          <p class="mt-6 leading-8 text-[#557184]">
+            Центр отдыха ТУНУК создан для тех, кто ценит
+            спокойствие, здоровье, комфорт и время.
+          </p>
+
+          <p class="mt-4 leading-8 text-[#557184]">
+            Здесь можно организовать семейный отдых, встречу
+            с друзьями или просто сделать паузу от повседневной
+            суеты и насладиться атмосферой отдыха.
+          </p>
+
+
+          <ul class="mt-7 grid gap-4 sm:grid-cols-2">
+
+            <li class="flex items-center gap-3">
+              <i data-lucide="check-circle-2" class="text-sky-500" width="21" height="21"></i>
+              <span class="font-semibold">
+                Уютная атмосфера
+              </span>
+            </li>
+
+            <li class="flex items-center gap-3">
+              <i data-lucide="check-circle-2" class="text-sky-500" width="21" height="21"></i>
+              <span class="font-semibold">
+                Насслаждаться моментом
+              </span>
+            </li>
+
+            <li class="flex items-center gap-3">
+              <i data-lucide="check-circle-2" class="text-sky-500" width="21" height="21"></i>
+              <span class="font-semibold">
+                Для семьи и друзей
+              </span>
+            </li>
+
+            <li class="flex items-center gap-3">
+              <i data-lucide="check-circle-2" class="text-sky-500" width="21" height="21"></i>
+              <span class="font-semibold">
+                Комфортный отдых
+              </span>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- GALLERY -->
+    <section id="gallery" class="w-full bg-[#eaf9ff] px-5 py-24 lg:px-8">
+
+      <div class="mx-auto max-w-7xl">
+
+        <div class="flex flex-wrap items-end justify-between gap-5">
+
+          <div>
+
+            <p class="eyebrow text-sky-600">
+              Галерея
+            </p>
+
+            <h2 class="section-heading mt-4 text-4xl font-bold md:text-5xl">
+              Атмосфера ТУНУК
+            </h2>
+
+          </div>
+
+          <p class="max-w-md leading-7 text-[#557184]">
+            Вода, уют и моменты, которые хочется
+            сохранить в памяти.
+          </p>
+
+        </div>
+
+
+        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+
+          <div class="gallery-tile h-72 rounded-3xl lg:col-span-2 lg:h-[390px]">
+
+            <img
+              class="gallery-image"
+              src="1a.jpg"
+              alt="Природа"
+            >
+
+          </div>
+
+
+          <div class="gallery-tile h-72 rounded-3xl lg:h-[390px]">
+
+            <img
+              class="gallery-image"
+              src="2a.jpg"
+              alt="Бассейн"
+            >
+
+          </div>
+
+
+          <div class="gallery-tile h-72 rounded-3xl lg:h-[390px]">
+
+            <img
+              class="gallery-image"
+              src="3a.jpg"
+              alt="Домик"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACTS -->
+    <section id="contacts" class="w-full px-5 py-24 lg:px-8">
+
+      <div
+        class="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-[#006fa6] p-8 text-white shadow-2xl md:p-12"
+      >
+
+        <div class="grid gap-10 lg:grid-cols-[1.25fr_.75fr] lg:items-end">
+
+          <div>
+
+            <p class="eyebrow text-sky-200">
+              Контакты
+            </p>
+
+            <h2 class="hero-title mt-4 text-4xl font-bold md:text-6xl">
+              Приезжайте отдыхать в ТУНУК
+            </h2>
+
+            <p class="mt-5 max-w-xl leading-8 text-white/85">
+              Свяжитесь с нами, чтобы узнать подробности,
+              уточнить свободные места и спланировать свой отдых.
+            </p>
+
+          </div>
+
+
+          <aside aria-label="Контактная информация" class="grid gap-5">
+
+            <div class="flex gap-4">
+
+              <i
+                data-lucide="map-pin"
+                class="mt-1 text-sky-200"
+                width="21"
+                height="21"
+              ></i>
+
+              <div>
+
+                <p class="text-sm font-bold uppercase tracking-wider text-sky-200">
+                  Адрес
+                </p>
+
+                <p class="mt-1 font-semibold">
+                  ул. Бекмамат Осмонова 74 А
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="flex gap-4">
+
+              <i
+                data-lucide="clock-3"
+                class="mt-1 text-sky-200"
+                width="21"
+                height="21"
+              ></i>
+
+              <div>
+
+                <p class="text-sm font-bold uppercase tracking-wider text-sky-200">
+                  Режим работы
+                </p>
+
+                <p class="mt-1 font-semibold">
+                  11:00-01:00
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="flex gap-3 pt-2">
+
+              <a
+                class="social-link"
+                href="https://www.instagram.com/tunuk_spa_relax_sport?stkn=NDZvc2J0anp6OTUw"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <i data-lucide="instagram" width="20" height="20"></i>
+              </a>
+
+              <a
+                class="social-link"
+                href="spa.htm"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+              >
+                <i data-lucide="whatsApp" width="20" height="20"></i>
+              </a>
+
+            
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-[#073d5b] px-5 py-8 text-white lg:px-8">
+
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
+
+      <p class="font-extrabold tracking-[0.13em]">
+        ТУНУК
+      </p>
+
+      <p class="text-sm text-white/70">
+        © 2026 Центр отдыха ТУНУК
+      </p>
+
+    </div>
+
+  </footer>
+
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    lucide.createIcons();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Наши услуги</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('fond.jpg') no-repeat center center/cover;
+      color: #fff;
+    }
+
+    .services {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 50px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .card {
+      background: #fff;
+      color: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 260px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #222;
+      font-size: 18px;
+    }
+
+    .card p {
+      font-size: 14px;
+      margin-top: 8px;
+      color: #555;
+    }
+
+    @media (max-width: 700px) {
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="services">
+    <div class="title">Наше меню</div>
+
+    <div class="cards">
+      <div class="card">
+        <img src="sport.jpg" alt="Спортивные мероприятия">
+        <div class="card-content">
+          <h3>Спортивные мероприятия</h3>
+          <p>Ежедневные активности и зарядка под руководством инструкторов.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="internet.jpg" alt="Доступ в интернет">
+        <div class="card-content">
+          <h3>Доступ в интернет</h3>
+          <p>Быстрый Wi-Fi на всей территории кемпинга.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="climb.jpg" alt="Инструктор по скалолазанию">
+        <div class="card-content">
+          <h3>Инструктор по скалолазанию</h3>
+          <p>Обучение и сопровождение на маршрутах разной сложности.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="bike.jpg" alt="Горные велосипеды">
+        <div class="card-content">
+          <h3>Горные велосипеды</h3>
+          <p>Прокат велосипедов и экскурсии по живописным местам.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
